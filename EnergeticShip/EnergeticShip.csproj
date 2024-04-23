@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>EnergeticShip</AssemblyName>
     <Description>Energetic ship plugin</Description>
-    <Version>0.1.0</Version>
+    <Version>0.2.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -22,12 +22,15 @@
   </ItemGroup>
   	
   <Target Name="NetcodePatch" AfterTargets="PostBuildEvent">
-	  <Exec Command="netcode-patch &quot;$(TargetPath)&quot; @(ReferencePathWithRefAssemblies->'&quot;%(Identity)&quot;', ' ')"/>
+	  <Exec Command="netcode-patch &quot;$(TargetPath)&quot; @(ReferencePathWithRefAssemblies->'&quot;%(Identity)&quot;', ' ')" />
   </Target>
   
   <ItemGroup>
     <Reference Include="Assembly-CSharp" Publicize="true">
       <HintPath>$(LethalCompanyBinariesDir)\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>$(LethalCompanyBinariesDir)\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
       <HintPath>$(LethalCompanyBinariesDir)\BepInEx.dll</HintPath>
@@ -39,7 +42,7 @@
       <HintPath>$(LethalCompanyBinariesDir)\MMHOOK\MMHOOK_Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="TerminalApi">
-      <HintPath>$(LethalCompanyBinariesDir)\NotAtomicBomb-TerminalApi-1.5.1\BepInEx\plugins\TerminalApi.dll</HintPath>
+      <HintPath>$(LethalCompanyBinariesDir)\NotAtomicBomb-TerminalApi\TerminalApi.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Netcode.Components">
       <HintPath>$(LethalCompanyBinariesDir)\Unity.Netcode.Components.dll</HintPath>
