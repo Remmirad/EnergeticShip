@@ -136,14 +136,14 @@ namespace EnergeticShip
         private static void OnKillPlayer(
             On.GameNetcodeStuff.PlayerControllerB.orig_KillPlayer orig, PlayerControllerB self,
             Vector3 bodyVelocity, bool spawnBody,
-            CauseOfDeath causeOfDeath, int deathAnimation)
+            CauseOfDeath causeOfDeath, int deathAnimation, Vector3 positionOffset)
         {
             int alive = StartOfRound.Instance.livingPlayers;
 
             Plugin.logger.LogInfo($"[{(NetworkManager.Singleton.IsServer ? "Server" : "Client")}]: Player {self} tries to die because of {causeOfDeath}. Safety guard active: {SAFETY_GUARD.IsActive()}, Players alive: {alive}");
             if (!(SAFETY_GUARD.IsActive() && alive <= 1) || causeOfDeath == CauseOfDeath.Gravity)
             {
-                orig(self,bodyVelocity,spawnBody,causeOfDeath,deathAnimation);
+                orig(self,bodyVelocity,spawnBody,causeOfDeath,deathAnimation, positionOffset);
             } else
             {
                 Plugin.logger.LogInfo($"[{(NetworkManager.Singleton.IsServer ? "Server" : "Client")}]: Prevented death");
